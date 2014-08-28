@@ -1,0 +1,20 @@
+{
+  "initial": {
+    "width": 800,
+    "height": 600,
+    "dpi": 72,
+    "quality": 50
+  },
+  "Home Photo": {
+    "width": 1536,
+    "height": 1536,
+    "dpi": 72,
+    "quality": 60
+  },
+  "Site Images": {
+    "width": 1536,
+    "height": 1152,
+    "dpi": 72,
+    "quality": 60
+  }
+}
