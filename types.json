@@ -16,5 +16,11 @@
     "height": 1152,
     "dpi": 72,
     "quality": 60
+  },
+  "Site Images@2x": {
+    "width": 3072,
+    "height": 2304,
+    "dpi": 72,
+    "quality": 60
   }
 }
