@@ -6,7 +6,7 @@ var argv = require('minimist')(process.argv.slice(2), {
       d: 'dpi',
       q: 'quality',
       f: 'file',
-      l: 'list'
+      o: 'output'
     }
   }),
   types = require('./types.json'),
@@ -66,7 +66,11 @@ var tasks = {
 var params = tasks.readParams(argv);
 tasks.getSize(params.file, function(err, res) {
   console.log(err, res);
-  tasks.resizeAndCenter(params.file, params.file + '_resized.jpg', tasks.getCrop(res, params), params, params.quality, function(e) {
-    console.log('e', e);
+  tasks.resizeAndCenter(params.file, params.output || (params.file + '_resized.jpg'), tasks.getCrop(res, params), params, params.quality, function(e) {
+    if (e) {
+      console.log('e', e);
+    } else {
+      console.log('done');
+    }
   });
 });
