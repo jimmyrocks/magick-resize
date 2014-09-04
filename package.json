@@ -23,6 +23,8 @@
   },
   "dependencies": {
     "gm": "1.16.0",
-    "minimist": "1.1.0"
+    "minimist": "1.1.0",
+    "mkdirp": "0.5.0",
+    "request": "2.40.0"
   }
 }

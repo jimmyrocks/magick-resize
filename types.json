@@ -22,5 +22,20 @@
     "height": 2304,
     "dpi": 72,
     "quality": 60
+  },
+  "Map Thumbnail": {
+    "width": 82,
+    "height": 73,
+    "dpi": 72,
+    "mask": "circle",
+    "quality": 60
+  },
+  "Map Thumbnail@2x": {
+    "width": 164,
+    "height": 146,
+    "dpi": 72,
+    "mask": "circle",
+    "quality": 60
   }
+
 }
