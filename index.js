@@ -113,8 +113,11 @@ var params,
                       });
                     });
                   });
+            } else {
+              fs.renameSync(temp.resize, params.output);
+              console.log('done c');
             }
-            console.log('done c');
+            console.log('done d');
           }
         });
       });
