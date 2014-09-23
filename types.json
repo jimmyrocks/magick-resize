@@ -37,25 +37,25 @@
     "mask": "circle",
     "quality": 60
   },
-  "Tablets": {
+  "tablet": {
     "width": 768,
     "height": 478,
     "dpi": 72,
     "quality": 60
   },
-  "Tablets@2x": {
+  "tablet@2x": {
     "width": 1536,
     "height": 956,
     "dpi": 72,
     "quality": 60
   },
-  "Phones": {
+  "phone": {
     "width": 320,
     "height": 240,
     "dpi": 72,
     "quality": 60
   },
-  "Phones@2x": {
+  "phone@2x": {
     "width": 640,
     "height": 480,
     "dpi": 72,
