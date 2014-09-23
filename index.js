@@ -115,7 +115,9 @@ var params,
                   });
             } else {
               fs.renameSync(temp.resize, params.output);
-              console.log('done c');
+              fs.unlink(temp.download, function() {
+                console.log('done c');
+              });
             }
             console.log('done d');
           }
