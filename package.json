@@ -15,7 +15,7 @@
     "email": "nate_irwin@nps.gov"
   }],
   "scripts": {
-    "start": "node index"
+    "start": "node resize"
   },
   "repository": {
     "type": "git",
