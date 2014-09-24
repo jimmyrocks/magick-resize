@@ -1,4 +1,4 @@
-module.exports = function(argv) {
+module.exports = function(argv, mainCallback) {
   var types = require('./types.json'),
     gm = require('gm'),
     fs = require('fs'),
@@ -62,19 +62,21 @@ module.exports = function(argv) {
       },
       compositeMask: function(source, mask, dest, callback) {
         var gmComposite = 'gm composite -compose in "' + source + '" "' + mask + '" "' + dest + '"';
-        console.log(gmComposite);
+        //console.log(gmComposite);
         exec(gmComposite, function(err) {
           if (err) throw err;
           callback();
         });
       },
       runParams: function() {
-        console.log(params);
+        //console.log(params);
         tasks.getSize(params.file, function(err, res) {
-          console.log(err, res);
+          //console.log(err, res);
           tasks.resizeAndCenter(params.file, temp.resize, tasks.getCrop(res, params), params, params.quality, function(e) {
             if (e) {
-              console.log('e', e);
+              //console.log('e', e);
+              //END with error
+              mainCallback(1);
             } else {
               if (params.mask === 'circle') {
                 var dim = [
@@ -85,17 +87,21 @@ module.exports = function(argv) {
                   .transparent('#000')
                   .drawCircle(dim[0], dim[1], dim[2], dim[3])
                   .write(
-                    temp.mask, function(a) {
-                      console.log('a', a);
-                      tasks.compositeMask(temp.resize, temp.mask, params.output, function(b) {
+                    temp.mask, function() {
+                      //console.log('a', a);
+                      tasks.compositeMask(temp.resize, temp.mask, params.output, function() {
                         fs.unlink(temp.resize, function() {
                           fs.unlink(temp.mask, function() {
                             if (temp.downloaded) {
                               fs.unlink(temp.download, function() {
-                                console.log('done a', b);
+                                //console.log('done a', b);
+                                //END no error
+                                mainCallback(0);
                               });
                             } else {
-                              console.log('done b', b);
+                              //console.log('done b', b);
+                              //END no error
+                              mainCallback(0);
                             }
                           });
                         });
@@ -104,10 +110,11 @@ module.exports = function(argv) {
               } else {
                 fs.renameSync(temp.resize, params.output);
                 fs.unlink(temp.download, function() {
-                  console.log('done c');
+                  //console.log('done c');
+                  //END no error
+                  mainCallback(0);
                 });
               }
-              console.log('done d');
             }
           });
         });
