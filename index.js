@@ -126,7 +126,6 @@ module.exports = function(args, mainCallback) {
       }
     };
   params = tasks.readParams(argv);
-  console.log(params);
   if (params.url) {
     //Download
     params.file = temp.download;
