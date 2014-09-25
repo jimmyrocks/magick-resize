@@ -1,12 +1,14 @@
 var fs = require('fs'),
-  mkdirp = require('mkdirp'),
   request = require('request'),
   util = require('util');
 
 module.exports = function download(url, dest, callback, silent) {
+  var mkdirp;
+
   if (dest) {
     // Make sure the dir exists
-    mkdirp.sync(dest.split('/').slice(0,-1).join('/'));
+    mkdirp = require('mkdirp');
+    mkdirp.sync(dest.split('/').slice(0, -1).join('/'));
   }
   var file = dest ? fs.createWriteStream(dest) : null,
     totalSize,
