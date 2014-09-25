@@ -1,5 +1,17 @@
-module.exports = function(argv, mainCallback) {
-  var types = require('./types.json'),
+module.exports = function(args, mainCallback) {
+  var argv = makeAlias(args, {
+      alias: {
+        t: 'type',
+        w: 'width',
+        h: 'height',
+        d: 'dpi',
+        q: 'quality',
+        f: 'file',
+        u: 'url',
+        o: 'output'
+      }
+    }),
+    types = require('./types.json'),
     gm = require('gm'),
     fs = require('fs'),
     exec = require('child_process').exec,
@@ -88,18 +100,18 @@ module.exports = function(argv, mainCallback) {
                   .drawCircle(dim[0], dim[1], dim[2], dim[3])
                   .write(
                     temp.mask, function() {
-                      //console.log('a', a);
+                      console.log('a', a);
                       tasks.compositeMask(temp.resize, temp.mask, params.output, function() {
                         fs.unlink(temp.resize, function() {
                           fs.unlink(temp.mask, function() {
                             if (temp.downloaded) {
                               fs.unlink(temp.download, function() {
-                                //console.log('done a', b);
+                                console.log('done a', b);
                                 //END no error
                                 mainCallback(0);
                               });
                             } else {
-                              //console.log('done b', b);
+                              console.log('done b', b);
                               //END no error
                               mainCallback(0);
                             }
@@ -110,7 +122,7 @@ module.exports = function(argv, mainCallback) {
               } else {
                 fs.renameSync(temp.resize, params.output);
                 fs.unlink(temp.download, function() {
-                  //console.log('done c');
+                  console.log('done c');
                   //END no error
                   mainCallback(0);
                 });
@@ -121,6 +133,9 @@ module.exports = function(argv, mainCallback) {
       }
     };
   params = tasks.readParams(argv);
+  console.log('argv:', argv);
+  console.log('params:');
+  console.log(params);
   if (params.url) {
     //Download
     params.file = temp.download;
@@ -129,4 +144,15 @@ module.exports = function(argv, mainCallback) {
   } else {
     tasks.runParams();
   }
+};
+var makeAlias = function(input, params) {
+  var output = {};
+  var aliases = params.alias;
+  for (var alias in aliases) {
+    if (input[alias] || input[aliases[alias]]) {
+      output[alias] = input[alias] || input[aliases[alias]];
+      output[aliases[alias]] = input[alias] || input[aliases[alias]];
+    }
+  }
+  return output;
 };
