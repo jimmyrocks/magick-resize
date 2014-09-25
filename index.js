@@ -81,12 +81,12 @@ module.exports = function(args, mainCallback) {
         });
       },
       runParams: function() {
-        //console.log(params);
+        console.log('___a1', params);
         tasks.getSize(params.file, function(err, res) {
-          //console.log(err, res);
+          console.log('___a2', err, res);
           tasks.resizeAndCenter(params.file, temp.resize, tasks.getCrop(res, params), params, params.quality, function(e) {
             if (e) {
-              //console.log('e', e);
+              console.log('___a3', 'e', e);
               //END with error
               mainCallback(1);
             } else {
@@ -132,6 +132,8 @@ module.exports = function(args, mainCallback) {
         });
       }
     };
+  console.log('-------------------------');
+  console.log(types);
   params = tasks.readParams(argv);
   console.log('argv:', argv);
   console.log('params:');
@@ -139,11 +141,18 @@ module.exports = function(args, mainCallback) {
   if (params.url) {
     //Download
     params.file = temp.download;
+    console.log('--z1');
     temp.downloaded = true;
-    download(params.url, temp.download, tasks.runParams);
+    console.log('--z2');
+    download(params.url, temp.download, function(a, b, c) {
+      console.log('@', a, b, c);
+      tasks.runParams();
+    });
+    console.log('--z3');
   } else {
     tasks.runParams();
   }
+  console.log('--z4');
 };
 var makeAlias = function(input, params) {
   var output = {};
