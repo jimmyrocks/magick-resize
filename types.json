@@ -17,7 +17,7 @@
     "dpi": 72,
     "quality": 60
   },
-  "Site Images@2x": {
+  "Site Images2x": {
     "width": 3072,
     "height": 2304,
     "dpi": 72,
@@ -30,7 +30,7 @@
     "mask": "circle",
     "quality": 60
   },
-  "Map Thumbnail@2x": {
+  "Map Thumbnail2x": {
     "width": 164,
     "height": 146,
     "dpi": 72,
@@ -43,7 +43,7 @@
     "dpi": 72,
     "quality": 60
   },
-  "tablet@2x": {
+  "tablet2x": {
     "width": 1536,
     "height": 956,
     "dpi": 72,
@@ -55,7 +55,7 @@
     "dpi": 72,
     "quality": 60
   },
-  "phone@2x": {
+  "phone2x": {
     "width": 640,
     "height": 480,
     "dpi": 72,
