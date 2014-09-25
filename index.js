@@ -17,7 +17,7 @@ module.exports = function(args, mainCallback) {
     exec = require('child_process').exec,
     download = require('./src/download.js'),
     params,
-    id = Math.floor((Math.random() * 1000000000) + 1),
+    id = Math.floor((Math.random() * 10000000000000) + 1),
     temp = {
       'resize': __dirname + '/tmp/resize_' + id + '.png',
       'mask': __dirname + '/tmp/mask_' + id + '.png',
@@ -81,12 +81,9 @@ module.exports = function(args, mainCallback) {
         });
       },
       runParams: function() {
-        console.log('___a1', params);
         tasks.getSize(params.file, function(err, res) {
-          console.log('___a2', err, res);
           tasks.resizeAndCenter(params.file, temp.resize, tasks.getCrop(res, params), params, params.quality, function(e) {
             if (e) {
-              console.log('___a3', 'e', e);
               //END with error
               mainCallback(1);
             } else {
@@ -100,18 +97,15 @@ module.exports = function(args, mainCallback) {
                   .drawCircle(dim[0], dim[1], dim[2], dim[3])
                   .write(
                     temp.mask, function() {
-                      console.log('a', a);
                       tasks.compositeMask(temp.resize, temp.mask, params.output, function() {
                         fs.unlink(temp.resize, function() {
                           fs.unlink(temp.mask, function() {
                             if (temp.downloaded) {
                               fs.unlink(temp.download, function() {
-                                console.log('done a', b);
                                 //END no error
                                 mainCallback(0);
                               });
                             } else {
-                              console.log('done b', b);
                               //END no error
                               mainCallback(0);
                             }
@@ -122,7 +116,6 @@ module.exports = function(args, mainCallback) {
               } else {
                 fs.renameSync(temp.resize, params.output);
                 fs.unlink(temp.download, function() {
-                  console.log('done c');
                   //END no error
                   mainCallback(0);
                 });
@@ -132,27 +125,18 @@ module.exports = function(args, mainCallback) {
         });
       }
     };
-  console.log('-------------------------');
-  console.log(types);
   params = tasks.readParams(argv);
-  console.log('argv:', argv);
-  console.log('params:');
   console.log(params);
   if (params.url) {
     //Download
     params.file = temp.download;
-    console.log('--z1');
     temp.downloaded = true;
-    console.log('--z2');
     download(params.url, temp.download, function(a, b, c) {
-      console.log('@', a, b, c);
       tasks.runParams();
     });
-    console.log('--z3');
   } else {
     tasks.runParams();
   }
-  console.log('--z4');
 };
 var makeAlias = function(input, params) {
   var output = {};
