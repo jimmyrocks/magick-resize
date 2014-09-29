@@ -124,9 +124,9 @@ module.exports = function(args, mainCallback) {
     };
   params = tasks.readParams(argv);
   temp = {
-    'resize': __dirname + '/tmp/resize_' + id + params.extention,
-    'mask': __dirname + '/tmp/mask_' + id + params.extention,
-    'download': __dirname + '/tmp/download_' + id + params.extention
+    'resize': __dirname + '/tmp/resize_' + id + '.' + params.extension,
+    'mask': __dirname + '/tmp/mask_' + id + '.' + params.extension,
+    'download': __dirname + '/tmp/download_' + id + '.' + params.extension
   };
   if (params.url) {
     //Download
