@@ -2,7 +2,7 @@ module.exports = function(args, mainCallback) {
   var argv = makeAlias(args, {
       alias: {
         d: 'dpi',
-        e: 'extention',
+        e: 'extension',
         f: 'file',
         h: 'height',
         o: 'output',
