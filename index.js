@@ -1,14 +1,15 @@
 module.exports = function(args, mainCallback) {
   var argv = makeAlias(args, {
       alias: {
-        t: 'type',
-        w: 'width',
-        h: 'height',
         d: 'dpi',
-        q: 'quality',
+        e: 'extention',
         f: 'file',
+        h: 'height',
+        o: 'output',
+        q: 'quality',
+        t: 'type',
         u: 'url',
-        o: 'output'
+        w: 'width'
       }
     }),
     types = require('./types.json'),
@@ -17,12 +18,8 @@ module.exports = function(args, mainCallback) {
     exec = require('child_process').exec,
     download = require('./src/download.js'),
     params,
+    temp,
     id = Math.floor((Math.random() * 10000000000000) + 1),
-    temp = {
-      'resize': __dirname + '/tmp/resize_' + id + '.png',
-      'mask': __dirname + '/tmp/mask_' + id + '.png',
-      'download': __dirname + '/tmp/download_' + id + '.png'
-    },
     tasks = {
       readParams: function(args) {
         var type = this.readTypes(['initial']);
@@ -126,6 +123,11 @@ module.exports = function(args, mainCallback) {
       }
     };
   params = tasks.readParams(argv);
+  temp = {
+    'resize': __dirname + '/tmp/resize_' + id + params.extention,
+    'mask': __dirname + '/tmp/mask_' + id + params.extention,
+    'download': __dirname + '/tmp/download_' + id + params.extention
+  };
   if (params.url) {
     //Download
     params.file = temp.download;
