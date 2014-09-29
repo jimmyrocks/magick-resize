@@ -6,7 +6,7 @@
     "quality": 50,
     "width": 800
   },
-  "Map Thumbnail": {
+  "thumbnail": {
     "dpi": 72,
     "extension": "png",
     "height": 73,
@@ -14,7 +14,23 @@
     "quality": 60,
     "width": 82
   },
-  "Map Thumbnail2x": {
+  "thumbnail2x": {
+    "dpi": 72,
+    "extension": "png",
+    "height": 146,
+    "mask": "circle",
+    "quality": 60,
+    "width": 164
+  },
+  "thumbnail_tablet": {
+    "dpi": 72,
+    "extension": "png",
+    "height": 73,
+    "mask": "circle",
+    "quality": 60,
+    "width": 82
+  },
+  "thumbnail_tablet_2x": {
     "dpi": 72,
     "extension": "png",
     "height": 146,
