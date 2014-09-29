@@ -6,26 +6,9 @@
     "quality": 50,
     "width": 800
   },
-  "Home Photo": {
-    "dpi": 72,
-    "height": 1536,
-    "quality": 60,
-    "width": 1536
-  },
-  "Site Images": {
-    "dpi": 72,
-    "height": 1152,
-    "quality": 60,
-    "width": 1536
-  },
-  "Site Images2x": {
-    "width": 3072,
-    "height": 2304,
-    "dpi": 72,
-    "quality": 60
-  },
   "Map Thumbnail": {
     "dpi": 72,
+    "extension": "png",
     "height": 73,
     "mask": "circle",
     "quality": 60,
@@ -33,6 +16,7 @@
   },
   "Map Thumbnail2x": {
     "dpi": 72,
+    "extension": "png",
     "height": 146,
     "mask": "circle",
     "quality": 60,
@@ -40,24 +24,28 @@
   },
   "tablet": {
     "dpi": 72,
+    "extension": "jpg",
     "height": 478,
     "quality": 60,
     "width": 768
   },
   "tablet2x": {
     "dpi": 72,
+    "extension": "jpg",
     "height": 956,
     "quality": 60,
     "width": 1536
   },
   "phone": {
     "dpi": 72,
+    "extension": "jpg",
     "height": 240,
     "quality": 60,
     "width": 320
   },
   "phone2x": {
     "dpi": 72,
+    "extension": "jpg",
     "height": 480,
     "quality": 60,
     "width": 640
