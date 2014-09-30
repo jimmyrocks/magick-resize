@@ -79,46 +79,52 @@ module.exports = function(args, mainCallback) {
       },
       runParams: function() {
         tasks.getSize(params.file, function(err, res) {
-          tasks.resizeAndCenter(params.file, temp.resize, tasks.getCrop(res, params), params, params.quality, function(e) {
-            if (e) {
-              //END with error
-              mainCallback(1);
-            } else {
-              if (params.mask === 'circle') {
-                var dim = [
-                  (params.width / 2), (params.height / 2), (params.width < params.height ? params.width - 2 : (params.width / 2)), (params.width < params.height ? (params.height / 2) : params.height - 2)
-                ];
-                gm(params.width, params.height, '#000')
-                  .fill('#fff')
-                  .transparent('#000')
-                  .drawCircle(dim[0], dim[1], dim[2], dim[3])
-                  .write(
-                    temp.mask, function() {
-                      tasks.compositeMask(temp.resize, temp.mask, params.output, function() {
-                        fs.unlink(temp.resize, function() {
-                          fs.unlink(temp.mask, function() {
-                            if (temp.downloaded) {
-                              fs.unlink(temp.download, function() {
+          if (err) {
+            console.log('Error with the following params:');
+            console.log(JSON.stringify(params, null, 2));
+            throw err;
+          } else {
+            tasks.resizeAndCenter(params.file, temp.resize, tasks.getCrop(res, params), params, params.quality, function(e) {
+              if (e) {
+                //END with error
+                mainCallback(1);
+              } else {
+                if (params.mask === 'circle') {
+                  var dim = [
+                    (params.width / 2), (params.height / 2), (params.width < params.height ? params.width - 2 : (params.width / 2)), (params.width < params.height ? (params.height / 2) : params.height - 2)
+                  ];
+                  gm(params.width, params.height, '#000')
+                    .fill('#fff')
+                    .transparent('#000')
+                    .drawCircle(dim[0], dim[1], dim[2], dim[3])
+                    .write(
+                      temp.mask, function() {
+                        tasks.compositeMask(temp.resize, temp.mask, params.output, function() {
+                          fs.unlink(temp.resize, function() {
+                            fs.unlink(temp.mask, function() {
+                              if (temp.downloaded) {
+                                fs.unlink(temp.download, function() {
+                                  //END no error
+                                  mainCallback(0);
+                                });
+                              } else {
                                 //END no error
                                 mainCallback(0);
-                              });
-                            } else {
-                              //END no error
-                              mainCallback(0);
-                            }
+                              }
+                            });
                           });
                         });
                       });
-                    });
-              } else {
-                fs.renameSync(temp.resize, params.output);
-                fs.unlink(temp.download, function() {
-                  //END no error
-                  mainCallback(0);
-                });
+                } else {
+                  fs.renameSync(temp.resize, params.output);
+                  fs.unlink(temp.download, function() {
+                    //END no error
+                    mainCallback(0);
+                  });
+                }
               }
-            }
-          });
+            });
+          }
         });
       }
     };
