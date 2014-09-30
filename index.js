@@ -138,9 +138,10 @@ module.exports = function(args, mainCallback) {
     //Download
     params.file = temp.download;
     temp.downloaded = true;
-    download(params.url, temp.download, function(a, b, c) {
+    console.log('Downloading:', params.url);
+    download(params.url, temp.download, function() {
       tasks.runParams();
-    });
+    }, false, 2);
   } else {
     tasks.runParams();
   }
