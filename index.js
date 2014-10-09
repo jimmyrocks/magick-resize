@@ -87,7 +87,7 @@ module.exports = function(args, mainCallback) {
             tasks.resizeAndCenter(params.file, temp.resize, tasks.getCrop(res, params), params, params.quality, function(e) {
               if (e) {
                 //END with error
-                mainCallback(1);
+                mainCallback(e, null);
               } else {
                 if (params.mask === 'circle') {
                   var dim = [
@@ -105,21 +105,26 @@ module.exports = function(args, mainCallback) {
                               if (temp.downloaded) {
                                 fs.unlink(temp.download, function() {
                                   //END no error
-                                  mainCallback(0);
+                                  mainCallback(null, true);
                                 });
                               } else {
                                 //END no error
-                                mainCallback(0);
+                                mainCallback(null, true);
                               }
                             });
                           });
                         });
                       });
                 } else {
-                  fs.renameSync(temp.resize, params.output);
-                  fs.unlink(temp.download, function() {
-                    //END no error
-                    mainCallback(0);
+                  fs.rename(temp.resize, params.output, function(renameError) {
+                    if (renameError) {
+                      mainCallback(renameError, false);
+                    } else {
+                      fs.unlink(temp.download, function() {
+                        //END no error
+                        mainCallback(null, true);
+                      });
+                    }
                   });
                 }
               }
