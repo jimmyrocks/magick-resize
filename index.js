@@ -17,6 +17,7 @@ module.exports = function(args, mainCallback) {
     fs = require('fs'),
     exec = require('child_process').exec,
     download = require('./src/download.js'),
+    mkdirp = require('mkdirp'),
     params,
     temp,
     id = Math.floor((Math.random() * 10000000000000) + 1),
@@ -89,6 +90,8 @@ module.exports = function(args, mainCallback) {
                 //END with error
                 mainCallback(e, null);
               } else {
+                // Make the containing directory if it doesn't already exist
+                mkdirp.sync(params.output.split('/').slice(0, -1).join('/'));
                 if (params.mask === 'circle') {
                   var dim = [
                     (params.width / 2), (params.height / 2), (params.width < params.height ? params.width - 2 : (params.width / 2)), (params.width < params.height ? (params.height / 2) : params.height - 2)
