@@ -1,13 +1,14 @@
 var argv = require('minimist')(process.argv.slice(2), {
     alias: {
-      t: 'type',
-      w: 'width',
-      h: 'height',
       d: 'dpi',
-      q: 'quality',
       f: 'file',
+      h: 'height',
+      m: 'mask',
+      o: 'output',
+      q: 'quality',
+      t: 'type',
       u: 'url',
-      o: 'output'
+      w: 'width'
     }
   }),
   magickResize = require('./index');
