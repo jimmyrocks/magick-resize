@@ -27,19 +27,19 @@ module.exports = function(args, mainCallback) {
 
         var compileMask = function() {
           tasks.compositeMask(temp.resize, temp.mask, params.output, function() {
-            // fs.unlink(temp.resize, function() {
-            //   fs.unlink(temp.mask, function() {
-            //     if (temp.downloaded) {
-            //       fs.unlink(temp.download, function() {
-            //         //END no error
-            //         mainCallback(null, true);
-            //       });
-            //     } else {
-            //       //END no error
-                   mainCallback(null, true);
-            //     }
-            //   });
-            // });
+            fs.unlink(temp.resize, function() {
+              fs.unlink(temp.mask, function() {
+                if (temp.downloaded) {
+                  fs.unlink(temp.download, function() {
+                    //END no error
+                    mainCallback(null, true);
+                  });
+                } else {
+                  //END no error
+                  mainCallback(null, true);
+                }
+              });
+            });
           });
         };
 
@@ -95,7 +95,7 @@ module.exports = function(args, mainCallback) {
         var possibleWidths = [newSize.height * newRatio, newSize.width];
         var possibleHeights = [newSize.width * newRatio, newSize.height];
         var crop = {};
-        if (possibleWidths[0]/possibleHeights[1] === newRatio) {
+        if (possibleWidths[0] / possibleHeights[1] === newRatio) {
           crop.width = possibleWidths[0];
           crop.height = possibleHeights[1];
         } else {
