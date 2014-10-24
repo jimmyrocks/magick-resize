@@ -23,6 +23,44 @@ module.exports = function(args, mainCallback) {
     temp,
     id = Math.floor((Math.random() * 10000000000000) + 1),
     tasks = {
+      createMask: function(params, temp, mainCallback) {
+
+        var compileMask = function() {
+          tasks.compositeMask(temp.resize, temp.mask, params.output, function() {
+            // fs.unlink(temp.resize, function() {
+            //   fs.unlink(temp.mask, function() {
+            //     if (temp.downloaded) {
+            //       fs.unlink(temp.download, function() {
+            //         //END no error
+            //         mainCallback(null, true);
+            //       });
+            //     } else {
+            //       //END no error
+                   mainCallback(null, true);
+            //     }
+            //   });
+            // });
+          });
+        };
+
+        if (params.mask === 'circle') {
+          // Draw a circle
+          var dim = [
+            (params.width / 2), (params.height / 2), (params.width < params.height ? params.width - 2 : (params.width / 2)), (params.width < params.height ? (params.height / 2) : params.height - 2)
+          ];
+          gm(params.width, params.height, '#000')
+            .fill('#fff')
+            .transparent('#000')
+            .drawCircle(dim[0], dim[1], dim[2], dim[3])
+            .write(
+              temp.mask, compileMask());
+        } else {
+          // Assume a file mask
+          download(params.mask, temp.mask, function() {
+            compileMask();
+          }, false, 2);
+        }
+      },
       readParams: function(args) {
         var type = this.readTypes(['initial']);
         if (args.type || args._) {
@@ -53,16 +91,25 @@ module.exports = function(args, mainCallback) {
           .size(callback);
       },
       getCrop: function(origSize, newSize) {
-        var crop = {
-          width: origSize.width < origSize.height ? origSize.width : origSize.height * (newSize.width / newSize.height),
-          height: origSize.width > origSize.height ? origSize.height : origSize.width * (newSize.width / newSize.height),
-        };
+        var newRatio = newSize.width / newSize.height;
+        var possibleWidths = [newSize.height * newRatio, newSize.width];
+        var possibleHeights = [newSize.width * newRatio, newSize.height];
+        var crop = {};
+        if (possibleWidths[0]/possibleHeights[1] === newRatio) {
+          crop.width = possibleWidths[0];
+          crop.height = possibleHeights[1];
+        } else {
+          crop.width = possibleWidths[1];
+          crop.height = possibleHeights[0];
+        }
         crop.x = origSize.width < origSize.height ? 0 : (origSize.width - crop.width) / 2;
         crop.y = origSize.width > origSize.height ? 0 : (origSize.height - crop.height) / 2;
         return crop;
 
       },
       resizeAndCenter: function(inPath, outPath, crop, newSize, quality, callback) {
+        console.log('crop', crop);
+        console.log('\n\nnewSize', newSize);
         gm(inPath)
           .crop(crop.width, crop.height, crop.x, crop.y)
           .resize(newSize.width, newSize.height)
@@ -72,7 +119,7 @@ module.exports = function(args, mainCallback) {
           });
       },
       compositeMask: function(source, mask, dest, callback) {
-        var gmComposite = 'gm composite -compose in "' + source + '" "' + mask + '" "' + dest + '"';
+        var gmComposite = 'gm composite -gravity north -compose in "' + source + '" "' + mask + '" "' + dest + '"';
         //console.log(gmComposite);
         exec(gmComposite, function(err) {
           if (err) throw err;
@@ -93,32 +140,8 @@ module.exports = function(args, mainCallback) {
               } else {
                 // Make the containing directory if it doesn't already exist
                 mkdirp.sync(params.output.split('/').slice(0, -1).join('/'));
-                if (params.mask === 'circle') {
-                  var dim = [
-                    (params.width / 2), (params.height / 2), (params.width < params.height ? params.width - 2 : (params.width / 2)), (params.width < params.height ? (params.height / 2) : params.height - 2)
-                  ];
-                  gm(params.width, params.height, '#000')
-                    .fill('#fff')
-                    .transparent('#000')
-                    .drawCircle(dim[0], dim[1], dim[2], dim[3])
-                    .write(
-                      temp.mask, function() {
-                        tasks.compositeMask(temp.resize, temp.mask, params.output, function() {
-                          fs.unlink(temp.resize, function() {
-                            fs.unlink(temp.mask, function() {
-                              if (temp.downloaded) {
-                                fs.unlink(temp.download, function() {
-                                  //END no error
-                                  mainCallback(null, true);
-                                });
-                              } else {
-                                //END no error
-                                mainCallback(null, true);
-                              }
-                            });
-                          });
-                        });
-                      });
+                if (params.mask) {
+                  tasks.createMask(params, temp, mainCallback);
                 } else {
                   fs.rename(temp.resize, params.output, function(renameError) {
                     if (renameError) {
