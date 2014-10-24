@@ -6,6 +6,14 @@
     "quality": 50,
     "width": 800
   },
+  "thumbnail_test": {
+    "dpi": 72,
+    "extension": "png",
+    "height": 67,
+    "mask": "https://nationalparkservice.github.io/data/places_mobile/icons/mask-alt.png",
+    "quality": 60,
+    "width": 57
+  },
   "thumbnail": {
     "dpi": 72,
     "extension": "png",
