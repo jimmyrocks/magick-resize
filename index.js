@@ -53,7 +53,9 @@ module.exports = function(args, mainCallback) {
             .transparent('#000')
             .drawCircle(dim[0], dim[1], dim[2], dim[3])
             .write(
-              temp.mask, compileMask());
+              temp.mask,
+              compileMask
+            );
         } else {
           // Assume a file mask
           download(params.mask, temp.mask, function() {
@@ -108,8 +110,6 @@ module.exports = function(args, mainCallback) {
 
       },
       resizeAndCenter: function(inPath, outPath, crop, newSize, quality, callback) {
-        console.log('crop', crop);
-        console.log('\n\nnewSize', newSize);
         gm(inPath)
           .crop(crop.width, crop.height, crop.x, crop.y)
           .resize(newSize.width, newSize.height)
@@ -120,7 +120,6 @@ module.exports = function(args, mainCallback) {
       },
       compositeMask: function(source, mask, dest, callback) {
         var gmComposite = 'gm composite -gravity north -compose in "' + source + '" "' + mask + '" "' + dest + '"';
-        //console.log(gmComposite);
         exec(gmComposite, function(err) {
           if (err) throw err;
           callback();
