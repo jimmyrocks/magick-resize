@@ -6,6 +6,7 @@ module.exports = function(args, mainCallback) {
         f: 'file',
         h: 'height',
         o: 'output',
+        m: 'mask',
         q: 'quality',
         t: 'type',
         u: 'url',
