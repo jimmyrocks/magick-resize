@@ -1,22 +1,54 @@
 {
   "initial": {
     "dpi": 72,
-    "extension": "png",
+    "extension": ".png",
     "height": 600,
     "quality": 50,
     "width": 800
   },
-  "thumbnail_test": {
+  "thumbnail_mask": {
     "dpi": 72,
-    "extension": "png",
+    "extension": ".png",
     "height": 67,
     "mask": "https://nationalparkservice.github.io/data/places_mobile/icons/mask-alt.png",
     "quality": 60,
+    "requestHeight": 67,
+    "requestWidth": 57,
     "width": 57
+  },
+  "thumbnail2x_mask": {
+    "dpi": 72,
+    "extension": "@2x.png",
+    "height": 134,
+    "mask": "https://nationalparkservice.github.io/data/places_mobile/icons/mask-alt@2x.png",
+    "quality": 60,
+    "requestHeight": 67,
+    "requestWidth": 57,
+    "width": 114
+  },
+  "thumbnail_tablet_mask": {
+    "dpi": 72,
+    "extension": ".png",
+    "height": 67,
+    "mask": "https://nationalparkservice.github.io/data/places_mobile/icons/mask-alt.png",
+    "quality": 60,
+    "requestHeight": 67,
+    "requestWidth": 57,
+    "width": 57
+  },
+  "thumbnail_tablet_2x_mask": {
+    "dpi": 72,
+    "extension": "@2x.png",
+    "height": 134,
+    "mask": "https://nationalparkservice.github.io/data/places_mobile/icons/mask-alt@2x.png",
+    "quality": 60,
+    "requestHeight": 67,
+    "requestWidth": 57,
+    "width": 114
   },
   "thumbnail": {
     "dpi": 72,
-    "extension": "png",
+    "extension": ".png",
     "height": 68,
     "mask": "circle",
     "quality": 60,
@@ -24,7 +56,7 @@
   },
   "thumbnail2x": {
     "dpi": 72,
-    "extension": "png",
+    "extension": ".png",
     "height": 135,
     "mask": "circle",
     "quality": 60,
@@ -32,7 +64,7 @@
   },
   "thumbnail_tablet": {
     "dpi": 72,
-    "extension": "png",
+    "extension": ".png",
     "height": 68,
     "mask": "circle",
     "quality": 60,
@@ -40,7 +72,7 @@
   },
   "thumbnail_tablet_2x": {
     "dpi": 72,
-    "extension": "png",
+    "extension": ".png",
     "height": 135,
     "mask": "circle",
     "quality": 60,
@@ -48,28 +80,28 @@
   },
   "tablet": {
     "dpi": 72,
-    "extension": "jpg",
+    "extension": ".jpg",
     "height": 478,
     "quality": 60,
     "width": 768
   },
   "tablet2x": {
     "dpi": 72,
-    "extension": "jpg",
+    "extension": ".jpg",
     "height": 956,
     "quality": 60,
     "width": 1536
   },
   "phone": {
     "dpi": 72,
-    "extension": "jpg",
+    "extension": ".jpg",
     "height": 240,
     "quality": 60,
     "width": 320
   },
   "phone2x": {
     "dpi": 72,
-    "extension": "jpg",
+    "extension": ".jpg",
     "height": 480,
     "quality": 60,
     "width": 640
