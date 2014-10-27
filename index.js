@@ -21,7 +21,7 @@ module.exports = function(args, mainCallback) {
     mkdirp = require('mkdirp'),
     params,
     temp,
-    id = Math.floor((Math.random() * 10000000000000) + 1),
+    id = Math.floor((Math.random() * 10000000000000) + 1).toString(),
     tasks = {
       createMask: function(params, temp, mainCallback) {
 
@@ -68,6 +68,8 @@ module.exports = function(args, mainCallback) {
         if (args.type || args._) {
           type = this.merge(type, this.readTypes([].concat(args.type || [], args._)));
         }
+        args.reqestWidth = args.reqestWidth || args.width;
+        args.reqestWidth = args.reqestHeight || args.height;
         return this.merge(type, args);
       },
       readTypes: function(typeList) {
@@ -161,9 +163,9 @@ module.exports = function(args, mainCallback) {
     };
   params = tasks.readParams(argv);
   temp = {
-    'resize': __dirname + '/tmp/resize_' + id + '.' + params.extension,
-    'mask': __dirname + '/tmp/mask_' + id + '.' + params.extension,
-    'download': __dirname + '/tmp/download_' + id + '.' + params.extension
+    'resize': __dirname + '/tmp/resize_' + id + params.extension,
+    'mask': __dirname + '/tmp/mask_' + id + params.extension,
+    'download': __dirname + '/tmp/download_' + id + params.extension
   };
   if (params.url) {
     //Download
