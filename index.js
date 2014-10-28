@@ -109,15 +109,6 @@ module.exports = function(args, mainCallback) {
         crop.x = origSize.width < origSize.height ? 0 : (origSize.width - crop.width) / 2;
         crop.y = origSize.width > origSize.height ? 0 : (origSize.height - crop.height) / 2;
 
-
-        // /////////////////////////////////////////////
-        console.log('origSize', origSize);
-        console.log('newSize', newSize);
-        console.log('newRatio', newRatio);
-        console.log('possibleHeights', possibleHeights);
-        console.log('possibleWidths', possibleWidths);
-        console.log('crop', crop);
-        // /////////////////////////////////////////////
         return crop;
 
       },
