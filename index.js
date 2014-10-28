@@ -96,8 +96,8 @@ module.exports = function(args, mainCallback) {
       },
       getCrop: function(origSize, newSize) {
         var newRatio = newSize.width / newSize.height;
-        var possibleWidths = [newSize.height * newRatio, newSize.width];
-        var possibleHeights = [newSize.width * newRatio, newSize.height];
+        var possibleWidths = [origSize.height * newRatio, origSize.width];
+        var possibleHeights = [origSize.width * newRatio, origSize.height];
         var crop = {};
         if (possibleWidths[0] / possibleHeights[1] === newRatio) {
           crop.width = possibleWidths[0];
@@ -108,6 +108,16 @@ module.exports = function(args, mainCallback) {
         }
         crop.x = origSize.width < origSize.height ? 0 : (origSize.width - crop.width) / 2;
         crop.y = origSize.width > origSize.height ? 0 : (origSize.height - crop.height) / 2;
+
+
+        // /////////////////////////////////////////////
+        console.log('origSize', origSize);
+        console.log('newSize', newSize);
+        console.log('newRatio', newRatio);
+        console.log('possibleHeights', possibleHeights);
+        console.log('possibleWidths', possibleWidths);
+        console.log('crop', crop);
+        // /////////////////////////////////////////////
         return crop;
 
       },
