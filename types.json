@@ -46,38 +46,6 @@
     "requestWidth": 57,
     "width": 114
   },
-  "thumbnail": {
-    "dpi": 72,
-    "extension": ".png",
-    "height": 68,
-    "mask": "circle",
-    "quality": 60,
-    "width": 57
-  },
-  "thumbnail2x": {
-    "dpi": 72,
-    "extension": ".png",
-    "height": 135,
-    "mask": "circle",
-    "quality": 60,
-    "width": 114
-  },
-  "thumbnail_tablet": {
-    "dpi": 72,
-    "extension": ".png",
-    "height": 68,
-    "mask": "circle",
-    "quality": 60,
-    "width": 57
-  },
-  "thumbnail_tablet_2x": {
-    "dpi": 72,
-    "extension": ".png",
-    "height": 135,
-    "mask": "circle",
-    "quality": 60,
-    "width": 114
-  },
   "tablet": {
     "dpi": 72,
     "extension": ".jpg",
