@@ -1,4 +1,15 @@
 module.exports = function(args, mainCallback) {
+  var makeAlias = function(input, params) {
+    var output = {};
+    var aliases = params.alias;
+    for (var alias in aliases) {
+      if (input[alias] || input[aliases[alias]]) {
+        output[alias] = input[alias] || input[aliases[alias]];
+        output[aliases[alias]] = input[alias] || input[aliases[alias]];
+      }
+    }
+    return output;
+  };
   var argv = makeAlias(args, {
       alias: {
         d: 'dpi',
@@ -179,15 +190,4 @@ module.exports = function(args, mainCallback) {
   } else {
     tasks.runParams();
   }
-};
-var makeAlias = function(input, params) {
-  var output = {};
-  var aliases = params.alias;
-  for (var alias in aliases) {
-    if (input[alias] || input[aliases[alias]]) {
-      output[alias] = input[alias] || input[aliases[alias]];
-      output[aliases[alias]] = input[alias] || input[aliases[alias]];
-    }
-  }
-  return output;
 };
