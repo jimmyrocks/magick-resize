@@ -74,49 +74,49 @@
     "quality": 60,
     "width": 640
   },
-  "350": {
+  "image_350": {
     "dpi": 72,
     "extension": ".jpg",
     "height": 260,
     "quality": 60,
     "width": 350
   },
-  "480": {
+  "image_480": {
     "dpi": 72,
     "extension": ".jpg",
     "height": 320,
     "quality": 60,
     "width": 480
   },
-  "640": {
+  "image_640": {
     "dpi": 72,
     "extension": ".jpg",
     "height": 504,
     "quality": 60,
     "width": 640
   },
-  "768": {
+  "image_768": {
     "dpi": 72,
     "extension": ".jpg",
     "height": 480,
     "quality": 60,
     "width": 768
   },
-  "960": {
+  "image_960": {
     "dpi": 72,
     "extension": ".jpg",
     "height": 640,
     "quality": 60,
     "width": 960
   },
-  "1080": {
+  "image_1080": {
     "dpi": 72,
     "extension": ".jpg",
     "height": 810,
     "quality": 60,
     "width": 1080
   },
-  "1536": {
+  "image_1536": {
     "dpi": 72,
     "extension": ".jpg",
     "height": 1152,
