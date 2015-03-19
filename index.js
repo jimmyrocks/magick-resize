@@ -37,20 +37,25 @@ module.exports = function(args, mainCallback) {
       createMask: function(params, temp, mainCallback) {
 
         var compileMask = function() {
-          tasks.compositeMask(temp.resize, temp.mask, params.output, function() {
-            fs.unlink(temp.resize, function() {
-              fs.unlink(temp.mask, function() {
-                if (temp.downloaded) {
-                  fs.unlink(temp.download, function() {
+          tasks.compositeMask(temp.resize, temp.mask, params.output, function(err) {
+            if (!err) {
+              fs.unlink(temp.resize, function() {
+                fs.unlink(temp.mask, function() {
+                  if (temp.downloaded) {
+                    fs.unlink(temp.download, function() {
+                      //END no error
+                      mainCallback(null, true);
+                    });
+                  } else {
                     //END no error
                     mainCallback(null, true);
-                  });
-                } else {
-                  //END no error
-                  mainCallback(null, true);
-                }
+                  }
+                });
               });
-            });
+            } else {
+              //END with error
+              mainCallback(err, false);
+            }
           });
         };
 
@@ -134,17 +139,15 @@ module.exports = function(args, mainCallback) {
       },
       compositeMask: function(source, mask, dest, callback) {
         var gmComposite = 'gm composite -gravity north -compose in "' + source + '" "' + mask + '" "' + dest + '"';
-        exec(gmComposite, function(err) {
-          if (err) throw err;
-          callback();
-        });
+        exec(gmComposite, callback);
       },
       runParams: function() {
         tasks.getSize(params.file, function(err, res) {
           if (err) {
             console.log('Error with the following params:');
             console.log(JSON.stringify(params, null, 2));
-            throw err;
+            //END with error
+            mainCallback(err, null);
           } else {
             tasks.resizeAndCenter(params.file, temp.resize, tasks.getCrop(res, params), params, params.quality, function(e) {
               if (e) {
