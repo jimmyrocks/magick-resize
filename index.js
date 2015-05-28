@@ -30,6 +30,7 @@ module.exports = function(args, mainCallback) {
     exec = require('child_process').exec,
     download = require('./src/download.js'),
     mkdirp = require('mkdirp'),
+    moveAsync = require('./src/moveAsync'),
     params,
     temp,
     id = Math.floor((Math.random() * 10000000000000) + 1).toString(),
@@ -159,7 +160,7 @@ module.exports = function(args, mainCallback) {
                 if (params.mask) {
                   tasks.createMask(params, temp, mainCallback);
                 } else {
-                  fs.rename(temp.resize, params.output, function(renameError) {
+                  moveAsync(temp.resize, params.output, function(renameError) {
                     if (renameError) {
                       mainCallback(renameError, false);
                     } else {
