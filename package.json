@@ -22,9 +22,9 @@
     "url": "http://github.com/jimmyrocks/magick-resize"
   },
   "dependencies": {
-    "gm": "1.18.1",
-    "minimist": "1.1.1",
+    "gm": "1.23.0",
+    "minimist": "1.2.0",
     "mkdirp": "0.5.1",
-    "request": "2.55.0"
+    "request": "2.83.0"
   }
 }
