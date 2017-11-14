@@ -87,35 +87,35 @@
   "image_350": {
     "dpi": 72,
     "extension": ".jpg",
-    "height": 260,
+    "height": 262,
     "quality": 60,
     "width": 350
   },
   "image_480": {
     "dpi": 72,
     "extension": ".jpg",
-    "height": 320,
+    "height": 360,
     "quality": 60,
     "width": 480
   },
   "image_640": {
     "dpi": 72,
     "extension": ".jpg",
-    "height": 504,
+    "height": 480,
     "quality": 60,
     "width": 640
   },
   "image_768": {
     "dpi": 72,
     "extension": ".jpg",
-    "height": 480,
+    "height": 576,
     "quality": 60,
     "width": 768
   },
   "image_960": {
     "dpi": 72,
     "extension": ".jpg",
-    "height": 640,
+    "height": 720,
     "quality": 60,
     "width": 960
   },
