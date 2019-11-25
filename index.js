@@ -19,6 +19,7 @@ module.exports = function(args, mainCallback) {
         o: 'output',
         m: 'mask',
         q: 'quality',
+        s: 'swap',
         t: 'type',
         u: 'url',
         w: 'width'
@@ -32,6 +33,7 @@ module.exports = function(args, mainCallback) {
     mkdirp = require('mkdirp'),
     moveAsync = require('./src/moveAsync'),
     params,
+    swapDirectory,
     temp,
     id = Math.floor((Math.random() * 10000000000000) + 1).toString(),
     tasks = {
@@ -178,10 +180,11 @@ module.exports = function(args, mainCallback) {
       }
     };
   params = tasks.readParams(argv);
+  swapDirectory = params.swap || (__dirname + '/tmp/');
   temp = {
-    'resize': __dirname + '/tmp/resize_' + id + params.extension,
-    'mask': __dirname + '/tmp/mask_' + id + params.extension,
-    'download': __dirname + '/tmp/download_' + id + params.extension
+    'resize': swapDirectory + '/resize_' + id + params.extension,
+    'mask': swapDirectory + '/mask_' + id + params.extension,
+    'download': swapDirectory + '/download_' + id + params.extension
   };
   if (params.url) {
     //Download
