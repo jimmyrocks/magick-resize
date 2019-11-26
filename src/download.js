@@ -1,6 +1,5 @@
 var fs = require('fs'),
-  request = require('request'),
-  util = require('util');
+  request = require('request');
 
 var download = module.exports = function download(url, dest, callback, silent, retries) {
   var mkdirp;
@@ -25,7 +24,7 @@ var download = module.exports = function download(url, dest, callback, silent, r
     });
 
   req.on('response', function(response) {
-    util.print('File: ' + url + '\n');
+    console.log('File: ' + url + '\n');
     totalSize = Number(response.headers['content-length']);
   });
 
@@ -33,23 +32,23 @@ var download = module.exports = function download(url, dest, callback, silent, r
     cur += chunk.length;
     if (!silent) {
       if (totalSize) {
-        util.print('Downloading:' + (100.0 * cur / totalSize).toFixed(2) + '% ' + (cur / 1048576).toFixed(2) + ' mb' + '. Total size: ' + (totalSize / 1048576).toFixed(2) + ' mb\r');
+        console.log('Downloading:' + (100.0 * cur / totalSize).toFixed(2) + '% ' + (cur / 1048576).toFixed(2) + ' mb' + '. Total size: ' + (totalSize / 1048576).toFixed(2) + ' mb\r');
       } else {
-        util.print('Downloading ' + (cur / 1048576).toFixed(2) + ' mb\r');
+        console.log('Downloading ' + (cur / 1048576).toFixed(2) + ' mb\r');
       }
     }
   });
 
   req.on('end', function() {
     if (!silent) {
-      util.print('Download complete (' + url + ')                                                 \n\r');
+      console.log('Download complete (' + url + ')                                                 \n\r');
     }
 
   });
 
   req.on('error', function(e) {
     if (retries && typeof(retries) === 'number') {
-      if (!silent)(util.print('Download failure, retrying #' + (retries - 1).toString()));
+      if (!silent)(console.log('Download failure, retrying #' + (retries - 1).toString()));
       download(url, dest, callback, silent, retries - 1);
     } else {
       callback(e);
